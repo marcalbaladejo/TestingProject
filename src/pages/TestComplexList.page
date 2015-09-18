@@ -1,0 +1,31 @@
+<apex:page standardController="Account" >
+  <h1>Test complex list</h1><br/><br/>
+  Working with <h1> {!Account.Name} </h1> contacts list <br/><br/>
+  List of contacts: <br/><br/>
+    <apex:form >
+  <apex:pageBlock title="Contacts"> 
+
+      <apex:pageBlockTable value="{!Account.Contacts}" var="Contact" id="contactslist" cellpadding="4" border="1">
+          <apex:column headerValue="Name">
+              <apex:outputPanel >
+                  <apex:actionSupport event="onmouseover" rerender="details">
+                      <apex:param name="cid" value="{!Contact.Id}"/>
+                  </apex:actionSupport>
+                  {!Contact.Name}
+              </apex:outputPanel>          
+          </apex:column>
+          <apex:column value="{!Contact.Title}" headerValue="Title"/>
+          <apex:column value="{!Contact.Email}" headerValue="Email" />
+          <apex:inlineEditSupport event="onClick"/>
+      </apex:pageBlockTable>
+
+  </apex:pageBlock>
+    </apex:form>
+  <apex:outputPanel id="details" title="Contact Details">
+      <apex:actionStatus startText="Updating">
+          <apex:facet name="stop">
+              <apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+          </apex:facet>
+      </apex:actionStatus>
+  </apex:outputPanel>
+</apex:page>
