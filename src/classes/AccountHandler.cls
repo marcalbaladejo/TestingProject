@@ -6,7 +6,7 @@ public class AccountHandler {
         	insert a;            
         }
         catch (DMLException e) {
-            System.debug('Error inserting: ' + e.getMessage());
+            System.debug('Error inserting:  ' + e.getMessage());
             a = null;
         }        
         return a;
